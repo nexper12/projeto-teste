@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notícias Interativas</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f4f7fa;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #005bea, #00c6fb);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+    
+
+    .container {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #005bea;
+    }
+
+    .card-content p {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Portal de Notícias Interativo</h1>
+    <p>As principais notícias do momento, tudo em um só lugar</p>
+  </header>
+
+ 
+
+  <div class="container">
+    <div class="card">
+      <img src="img/02d2c405-c807-419a-a8e4-613c617bb8c1.jpeg" alt="Notícia 1">
+      <div class="card-content">
+        <h3>Ministro da Saúde inaugura maternidade referência em atendimento humanizado em Niterói (RJ)</h3>
+        <p>ministro da Saúde, Alexandre Padilha, inaugurou nesta quinta-feira (8), em Niterói (RJ), a nova Maternidade Alzira Reis. Com a reforma, a unidade, que é referência no município em atendimento humanizado a gestantes, dobrou a sua capacidade de 500 para 1 mil atendimentos por mês.
+
+“Inauguramos esta nova maternidade em maio, mês da luta contra a morte e a mortalidade materno-infantil. Com uma estrutura mais moderna e adequada para o cuidado, ela será uma referência ainda maior do parto humanizado não só no estado do Rio de Janeiro, mas em todo o nosso país”, disse o ministro da Saúde.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="img/0843ff9e-c16d-423e-991b-f620485d5d48.jpeg" alt="Notícia 2">
+      <div class="card-content">
+        <h3>Ministério da Saúde lança Mês de Vacinação dos Povos Indígenas para proteção de 72 mil indígenas em todo o país</h3>
+        <p>Ministério da Saúde dá início ao Mês de Vacinação dos Povos Indígenas (MVPI) para intensificar as coberturas vacinais em territórios de todo o Brasil. As ações vão até o dia 24 de maio, com previsão de que mais de 72 mil indígenas sejam vacinados. O lançamento foi realizado no DSEI Bahia, no município de Banzaê, com a presença do ministro da Saúde, Alexandre Padilha. Durante o evento, foram anunciados R$ 8,8 milhões para reforçar assistência aos indígenas no estado.  </p>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="img/e4a978b0-3bee-40a3-b9d6-672092f68bd7.png" alt="Notícia 3">
+      <div class="card-content">
+        <h3>Mais Médicos abre três mil vagas para ampliar atendimento e reduzir tempo de espera no SUS</h3>
+        <p>Ministério da Saúde lança nesta sexta-feira (2/05) um novo edital do Programa Mais Médicos para ampliar o acesso à atenção primária no Sistema Único de Saúde (SUS). Com um total de 3.174 vagas, 3.066 serão distribuídas entre 1.620 municípios e 108 destinadas a 26 Distritos Sanitários Especiais Indígenas (DSEIs), fortalecendo a assistência nas regiões remotas e de maior vulnerabilidade social. Os médicos interessados poderão se inscrever a partir da próxima segunda-feira (5) até o dia 8 de maio.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Portal de Notícias. Todos os direitos reservados.
+  </footer>
+</body>
+</html>

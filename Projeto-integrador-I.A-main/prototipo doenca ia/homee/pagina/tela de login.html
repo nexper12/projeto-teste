@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Tela de Login</title>
+  <style>
+    /* Estilo geral */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1c1c1c;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background-image: url('https://wallpaperbat.com/img/8612014-update-clinical-wallpaper.jpg');
+      /* Caminho da imagem */
+      background-size: cover;
+      /* Faz a imagem cobrir toda a tela */
+      background-repeat: no-repeat;
+      /* Evita que a imagem se repita */
+      background-position: center;
+      /* Centraliza a imagem */
+    }
+
+    /* Caixa do formulário */
+    .login-box {
+      background-color: rgb(187, 212, 233);
+      padding: 100px;
+      width: 100%;
+      max-width: 550px;
+      border-radius: 102px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1.1em;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    .colorido {
+      font-size: 40px;
+      font-weight: bold;
+      animation: mudaCor 7s infinite;
+      text-align: center;
+    }
+
+    @keyframes mudaCor {
+      25% {
+        color: rgb(33, 110, 17);
+      }
+
+      50% {
+        color: rgb(50, 158, 17);
+      }
+
+      100% {
+        color: rgb(56, 156, 10);
+      }
+
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #007bff;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .botao-inscrever {
+      position: absolute;
+      top: 800px;
+      left: 16px;
+      font-size: 18px;
+
+    }
+    
+  </style>
+</head>
+
+<body>
+  
+  <a href="file:///C:/Users/leonu/OneDrive/Documentos/Projeto-integrador-I.A-main/prototipo%20doenca%20ia/cadastra-se.html">
+    <button class="botao-inscrever">Inscreva-se</button>
+  </a>
+
+  <div class="login-box">
+    <h2 class="colorido">Digite seu nome</h2>
+    <form
+      action="file:///C:/Users/User/OneDrive/Documentos/Projeto-integrador-I.A-main/prototipo%20doenca%20ia/index.html"
+      method="GET">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required>
+
+      <a href="pagina-de-inscricao.html">
+        <button>Entrar</button>
+      </a>
+
+<p>Esqueci Minha Senha</p>
+    </form>
+  </div>
+ 
+</body>
+
+</html>

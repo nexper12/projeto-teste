@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat IA Interativo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://wallpaperbat.com/img/8612014-update-clinical-wallpaper.jpg');
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    .tabs {
+  display: flex;
+  gap: 12px;
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  justify-content: center;
+}
+
+.tab {
+  text-decoration: none;
+  color: #555;
+  background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+  padding: 12px 50px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.tab:hover {
+  background: linear-gradient(to bottom, #e0ecff, #d4e1ff);
+  color: #2c3e50;
+  transform: translateY(-3px);
+  box-shadow: 0 60px 14px rgba(0, 0, 0, 0.1);
+}
+
+.tab.active {
+  background: linear-gradient(to right, #4a90e2, #357ABD);
+  color: white;
+  border: 2px solid #2f5abf;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+
+    .tooltip {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .botao-ajuda {
+      background-color: #007BFF;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .botao-ajuda:hover {
+      background-color: #0056b3;
+    }
+
+    .tooltip-texto {
+      visibility: hidden;
+      width: 200px;
+      background-color: black;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px;
+      position: absolute;
+      z-index: 1;
+      top: 40px;
+      right: 0;
+    }
+
+    .tooltip:hover .tooltip-texto {
+      visibility: visible;
+    }
+
+    .chat-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      width: 90%;
+      max-width: 600px;
+      margin: 100px 0 20px;
+    }
+
+    .chat-header {
+      font-size: 24px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .chat-log {
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+    }
+
+    .mensagem-usuario {
+      text-align: right;
+      color: blue;
+    }
+
+    .mensagem-ia {
+      text-align: left;
+      color: rgb(0, 13, 128);
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .texto-primeiros-socorros {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: 40px auto;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    .primeiros-socorros {
+      background: #ffffff;
+      padding: 2rem;
+      max-width: 700px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .primeiros-socorros:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .primeiros-socorros h1 {
+      color: #00796b;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .primeiros-socorros p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 1rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .primeiros-socorros p::before {
+      content: "💡";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 1rem;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="tabs">
+    <a href="noticias.html" class="tab">noticias</a>
+    <a href="#" class="tab">Aba 2</a>
+    <a href="#" class="tab">Aba 3</a>
+    <a href="#" class="tab">Aba 4</a>
+    <a href="#" class="tab">Aba 5</a>
+  </div>
+
+
+  <div class="tooltip">
+    <button class="botao-ajuda" onclick="alert" (dd34)>Ajuda</button>
+    <div class="tooltip-texto">Digite sintomas ou dúvidas médicas para receber orientação.</div>
+  </div>
+
+
+  <div class="chat-container">
+    <div class="chat-header">Chat IA - Assistente de Saúde</div>
+    <div class="chat-log" id="chatLog"></div>
+    <div class="chat-input">
+      <input type="text" id="userInput" placeholder="Digite sua mensagem...">
+      <button onclick="enviarMensagem()">Enviar</button>
+    </div>
+  </div>
+
+
+
+  <br>
+
+  <div class="primeiros-socorros">
+    <h1>Primeiros Socorros</h1>
+    <p>
+      Primeiros socorros são medidas iniciais prestadas a uma pessoa que sofreu um acidente ou mal súbito, antes da
+      chegada de socorro especializado. Essas ações podem ser fundamentais para salvar vidas, reduzir complicações e
+      promover uma recuperação mais rápida da vítima.
+    </p>
+    <p>
+      É essencial que qualquer pessoa saiba como agir em situações de emergência. O primeiro passo é manter a calma e
+      garantir a segurança do local, evitando riscos para si e para a vítima. Em seguida, deve-se avaliar a situação e
+      acionar o serviço de emergência, fornecendo informações claras e objetivas.
+    </p>
+    <p>
+      Entre as principais técnicas de primeiros socorros estão a reanimação cardiopulmonar (RCP), o controle de
+      sangramentos, a imobilização de fraturas e o tratamento de queimaduras. Cada procedimento deve ser feito com
+      cuidado, respeitando os limites do conhecimento da pessoa que está ajudando.
+    </p>
+    <p>
+      Além disso, é importante que os cidadãos busquem capacitação através de cursos e treinamentos, para agir de forma
+      segura e eficaz em momentos críticos. A educação em primeiros socorros é uma ferramenta poderosa de proteção e
+      solidariedade em nossa sociedade.
+    </p>
+  </div>
+  <br>
+  <br>
+  <iframe width="650" height="315" src="https://www.youtube.com/embed/mNi1JYtjp3o?si=TIzoyG8B-stic_x-"
+    title="YouTube video player" frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault(); // impede navegação
+        tabs.forEach(t => t.classList.remove('active')); // remove ativa de todas
+        tab.classList.add('active'); // ativa clicada
+      });
+    });
+    function enviarMensagem() {
+      const input = document.getElementById('userInput');
+      const texto = input.value.trim();
+      if (texto === '') return;
+
+      adicionarMensagem(texto, 'mensagem-usuario');
+      const resposta = gerarResposta(texto);
+      adicionarMensagem(resposta, 'mensagem-ia');
+
+      input.value = '';
+    }
+
+    function adicionarMensagem(texto, classe) {
+      const chatLog = document.getElementById('chatLog');
+      const novaMensagem = document.createElement('div');
+      novaMensagem.className = classe;
+      novaMensagem.innerText = texto;
+      chatLog.appendChild(novaMensagem);
+      chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+    function gerarResposta(texto) {
+      // Simula uma resposta simples baseada em palavras-chave
+      texto = texto.toLowerCase();
+      if (texto.includes("febre")) {
+        return "A febre pode indicar uma infecção. Hidrate-se bem e, se persistir, procure um médico.";
+      } else if (texto.includes("dor de cabeça")) {
+        return "Recomendo repouso e hidratação. Se for intensa ou frequente, busque atendimento.";
+      } else if (texto.includes("tosse")) {
+        return "A tosse pode estar relacionada a alergias, infecções ou irritações. Observe se há outros sintomas.";
+      } else {
+        return "Obrigado por compartilhar. Para um diagnóstico preciso, é sempre melhor consultar um profissional de saúde.";
+      }
+      if (texto.includes("febre")) {
+        return "A febre pode indicar uma infecção. Hidrate-se bem e, se persistir, procure um médico.";
+      } else if (texto.includes("dor de cabeça")) {
+        return "Recomendo repouso e hidratação. Se for intensa ou frequente, busque atendimento.";
+      } else if (texto.includes("tosse")) {
+        return "A tosse pode estar relacionada a alergias, infecções ou irritações. Observe se há outros sintomas.";
+      } else if (texto.includes("náusea")) {
+        return "Náuseas podem estar associadas a distúrbios digestivos, gravidez ou infecções virais.";
+      } else if (texto.includes("diarreia")) {
+        return "Diarreia pode ser causada por infecções alimentares ou intolerâncias. Beba bastante líquido.";
+      } else if (texto.includes("constipação")) {
+        return "Constipação pode ser aliviada com dieta rica em fibras, água e atividade física.";
+      } else if (texto.includes("dor no peito")) {
+        return "Dor no peito pode ser grave. Procure atendimento médico imediatamente.";
+      } else if (texto.includes("falta de ar")) {
+        return "Falta de ar pode indicar problemas respiratórios ou cardíacos. Avaliação médica é necessária.";
+      } else if (texto.includes("ansiedade")) {
+        return "A ansiedade pode causar sintomas físicos e emocionais. Técnicas de respiração e apoio psicológico ajudam.";
+      } else if (texto.includes("depressão")) {
+        return "A depressão precisa de acompanhamento psicológico e/ou psiquiátrico. Procure ajuda especializada.";
+      } else if (texto.includes("insonia")) {
+        return "Manter uma rotina regular e evitar telas antes de dormir pode ajudar na insônia.";
+      } else if (texto.includes("alergia")) {
+        return "Evite o contato com o alérgeno e, se necessário, use antialérgicos.";
+      } else if (texto.includes("asma")) {
+        return "Asma requer controle com broncodilatadores e evitar gatilhos como poeira e fumaça.";
+      } else if (texto.includes("bronquite")) {
+        return "Bronquite pode ser aguda ou crônica. Hidrate-se e evite o cigarro.";
+      } else if (texto.includes("covid")) {
+        return "Se você suspeita de COVID-19, procure testagem e isolamento. Sintomas incluem febre, tosse e perda de olfato.";
+      } else if (texto.includes("gripe")) {
+        return "A gripe causa febre, dores no corpo e mal-estar. Repouso e hidratação ajudam.";
+      } else if (texto.includes("resfriado")) {
+        return "Resfriados são comuns e geralmente leves. Hidratação e descanso são indicados.";
+      } else if (texto.includes("enxaqueca")) {
+        return "Enxaquecas podem ser intensas. Evite gatilhos como estresse e luz forte.";
+      } else if (texto.includes("pressão alta")) {
+        return "A hipertensão deve ser controlada com medicamentos e hábitos saudáveis.";
+      } else if (texto.includes("pressão baixa")) {
+        return "Pressão baixa pode causar tontura. Hidrate-se e evite levantar-se rapidamente.";
+      } else if (texto.includes("diabetes")) {
+        return "O controle do diabetes envolve dieta, exercícios e, às vezes, medicamentos.";
+      } else if (texto.includes("colesterol")) {
+        return "Colesterol alto pode ser controlado com alimentação equilibrada e exercícios.";
+      } else if (texto.includes("gastrite")) {
+        return "Evite alimentos irritantes, como café e álcool, e siga o tratamento indicado.";
+      } else if (texto.includes("refluxo")) {
+        return "Evite deitar após comer e evite comidas gordurosas para controlar o refluxo.";
+      } else if (texto.includes("úlcera")) {
+        return "Úlceras exigem tratamento com medicamentos específicos. Evite álcool e tabaco.";
+      } else if (texto.includes("hepatite")) {
+        return "Existem vários tipos de hepatite. Procure um médico para diagnóstico e tratamento correto.";
+      } else if (texto.includes("dengue")) {
+        return "Dengue causa febre alta, dor no corpo e manchas. Hidrate-se e procure ajuda médica.";
+      } else if (texto.includes("zika")) {
+        return "Zika pode causar febre, dor nas articulações e conjuntivite. Repouso e hidratação são indicados.";
+      } else if (texto.includes("chikungunya")) {
+        return "Chikungunya causa dor intensa nas articulações. Repouso e analgésicos podem ajudar.";
+      } else if (texto.includes("tuberculose")) {
+        return "Tuberculose afeta os pulmões. Procure atendimento médico e siga o tratamento completo.";
+      } else if (texto.includes("câncer")) {
+        return "Câncer exige diagnóstico precoce e tratamento especializado. Procure um oncologista.";
+      } else if (texto.includes("obesidade")) {
+        return "Obesidade aumenta o risco de várias doenças. Alimentação saudável e atividade física são fundamentais.";
+      } else if (texto.includes("anemia")) {
+        return "Anemia pode causar cansaço. Consuma alimentos ricos em ferro e siga orientação médica.";
+      } else if (texto.includes("osteoporose")) {
+        return "Consuma cálcio e faça atividades físicas. Consulte um médico para tratamento adequado.";
+      } else if (texto.includes("artrite")) {
+        return "Artrite causa dor e rigidez nas articulações. Tratamento pode incluir medicamentos e fisioterapia.";
+      } else if (texto.includes("artrose")) {
+        return "Artrose é o desgaste das articulações. Exercícios leves e medicação ajudam a controlar.";
+      } else if (texto.includes("lombalgia")) {
+        return "Dor lombar pode ser aliviada com alongamentos, fisioterapia e boa postura.";
+      } else if (texto.includes("ciática")) {
+        return "Dor ciática irradia da coluna para as pernas. Fisioterapia e anti-inflamatórios são úteis.";
+      } else if (texto.includes("hipotireoidismo")) {
+        return "Pode causar cansaço e ganho de peso. O tratamento envolve reposição hormonal.";
+      } else if (texto.includes("hipertireoidismo")) {
+        return "Pode causar agitação e perda de peso. É necessário acompanhamento médico.";
+      } else if (texto.includes("infecção urinária")) {
+        return "Causa dor ao urinar e vontade frequente. Beba muita água e procure orientação médica.";
+      } else if (texto.includes("cistite")) {
+        return "Inflamação na bexiga, geralmente causada por infecção. Necessário tratamento com antibióticos.";
+      } else if (texto.includes("pedra nos rins")) {
+        return "Causa dor intensa. Beba bastante água e procure um urologista.";
+      } else {
+        return "Obrigado por compartilhar. Para um diagnóstico preciso, é sempre melhor consultar um profissional de saúde.";
+      }
+      if (texto.includes("febre")) {
+        return "A febre pode indicar uma infecção. Hidrate-se bem e, se persistir, procure um médico.";
+      } else if (texto.includes("dor de cabeça")) {
+        return "Recomendo repouso e hidratação. Se for intensa ou frequente, busque atendimento.";
+      } else if (texto.includes("tosse")) {
+        return "A tosse pode estar relacionada a alergias, infecções ou irritações. Observe se há outros sintomas.";
+      } else if (texto.includes("náusea")) {
+        return "Náuseas podem estar associadas a distúrbios digestivos, gravidez ou infecções virais.";
+      } else if (texto.includes("diarreia")) {
+        return "Diarreia pode ser causada por infecções alimentares ou intolerâncias. Beba bastante líquido.";
+      } else if (texto.includes("constipação")) {
+        return "Constipação pode ser aliviada com dieta rica em fibras, água e atividade física.";
+      } else if (texto.includes("dor no peito")) {
+        return "Dor no peito pode ser grave. Procure atendimento médico imediatamente.";
+      } else if (texto.includes("falta de ar")) {
+        return "Falta de ar pode indicar problemas respiratórios ou cardíacos. Avaliação médica é necessária.";
+      } else if (texto.includes("ansiedade")) {
+        return "A ansiedade pode causar sintomas físicos e emocionais. Técnicas de respiração e apoio psicológico ajudam.";
+      } else if (texto.includes("depressão")) {
+        return "A depressão precisa de acompanhamento psicológico e/ou psiquiátrico. Procure ajuda especializada.";
+      } else if (texto.includes("insônia")) {
+        return "Manter uma rotina regular e evitar telas antes de dormir pode ajudar na insônia.";
+      } else if (texto.includes("alergia")) {
+        return "Evite o contato com o alérgeno e, se necessário, use antialérgicos.";
+      } else if (texto.includes("asma")) {
+        return "Asma requer controle com broncodilatadores e evitar gatilhos como poeira e fumaça.";
+      } else if (texto.includes("bronquite")) {
+        return "Bronquite pode ser aguda ou crônica. Hidrate-se e evite o cigarro.";
+      } else if (texto.includes("covid")) {
+        return "Se você suspeita de COVID-19, procure testagem e isolamento. Sintomas incluem febre, tosse e perda de olfato.";
+      } else if (texto.includes("gripe")) {
+        return "A gripe causa febre, dores no corpo e mal-estar. Repouso e hidratação ajudam.";
+      } else if (texto.includes("resfriado")) {
+        return "Resfriados são comuns e geralmente leves. Hidratação e descanso são indicados.";
+      } else if (texto.includes("enxaqueca")) {
+        return "Enxaquecas podem ser intensas. Evite gatilhos como estresse e luz forte.";
+      } else if (texto.includes("tontura")) {
+        return "Tontura pode estar ligada à pressão arterial ou labirintite. Mantenha-se hidratado e procure avaliação médica.";
+      } else if (texto.includes("formigamento")) {
+        return "Formigamento pode ser sinal de má circulação ou problemas neurológicos. Procure um médico se persistir.";
+      } else if (texto.includes("visão turva")) {
+        return "Pode estar relacionada a problemas de visão, glicemia ou pressão. Agende uma consulta médica.";
+      } else if (texto.includes("sangramento")) {
+        return "Sangramentos anormais devem ser investigados. Procure atendimento médico imediatamente.";
+      } else if (texto.includes("dor abdominal")) {
+        return "Dor abdominal pode ter diversas causas. Observe se há febre, náuseas ou alteração nas fezes.";
+      } else if (texto.includes("inchaço")) {
+        return "Inchaços podem ser por retenção de líquidos, inflamação ou problemas circulatórios.";
+      } else if (texto.includes("palpitações")) {
+        return "Batimentos cardíacos acelerados ou irregulares devem ser avaliados por um cardiologista.";
+      } else if (texto.includes("fadiga")) {
+        return "Fadiga constante pode indicar anemia, distúrbios da tireoide ou estresse. Consulte um médico.";
+      } else if (texto.includes("fraqueza")) {
+        return "Fraqueza generalizada pode ser sintoma de algo mais sério. Procure um médico.";
+      } else if (texto.includes("perda de apetite")) {
+        return "Pode estar ligada a infecções, estresse ou problemas gástricos. Se persistir, consulte um médico.";
+      } else if (texto.includes("excesso de sono")) {
+        return "Sonolência excessiva pode indicar distúrbios do sono ou desequilíbrios hormonais.";
+      } else if (texto.includes("sudorese")) {
+        return "Suor excessivo pode ser normal, mas também pode indicar problemas hormonais ou febre.";
+      } else if (texto.includes("calafrios")) {
+        return "Calafrios geralmente acompanham febres ou infecções. Procure observar outros sintomas.";
+      } else {
+        return "Obrigado por compartilhar. Para um diagnóstico preciso, é sempre melhor consultar um profissional de saúde.";
+      }
+    }
+
+    document.getElementById("userInput").addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        enviarMensagem();
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<div class="primeiros-socorros">
+  <h1>Primeiros Socorros</h1>
+  <p>
+    Primeiros socorros são medidas iniciais prestadas a uma pessoa que sofreu um acidente ou mal súbito, antes da chegada de socorro especializado. Essas ações podem ser fundamentais para salvar vidas, reduzir complicações e promover uma recuperação mais rápida da vítima.
+  </p>
+  <p>
+    É essencial que qualquer pessoa saiba como agir em situações de emergência. O primeiro passo é manter a calma e garantir a segurança do local, evitando riscos para si e para a vítima. Em seguida, deve-se avaliar a situação e acionar o serviço de emergência, fornecendo informações claras e objetivas.
+  </p>
+  <p>
+    Entre as principais técnicas de primeiros socorros estão a reanimação cardiopulmonar (RCP), o controle de sangramentos, a imobilização de fraturas e o tratamento de queimaduras. Cada procedimento deve ser feito com cuidado, respeitando os limites do conhecimento da pessoa que está ajudando.
+  </p>
+  <p>
+    Além disso, é importante que os cidadãos busquem capacitação através de cursos e treinamentos, para agir de forma segura e eficaz em momentos críticos. A educação em primeiros socorros é uma ferramenta poderosa de proteção e solidariedade em nossa sociedade.
+  </p>
+</div>
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.primeiros-socorros {
+  background: #ffffff;
+  padding: 2rem;
+  max-width: 700px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeInUp 0.8s ease;
+}
+
+.primeiros-socorros:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.primeiros-socorros h1 {
+  color: #00796b;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.primeiros-socorros p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.primeiros-socorros p::before {
+  content: "💡";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 1rem;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

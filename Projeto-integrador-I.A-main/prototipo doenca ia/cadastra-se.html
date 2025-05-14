@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Criar Conta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://wallpaperbat.com/img/8612014-update-clinical-wallpaper.jpg');
+            /* Caminho da imagem */
+            background-size: cover;
+            /* Faz a imagem cobrir toda a tela */
+            background-repeat: no-repeat;
+            /* Evita que a imagem se repita */
+            background-position: center;
+            /* Centraliza a imagem */
+        }
+
+        .container {
+            background: rgb(187, 212, 233);
+            padding: 150px;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .msg {
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Criar Conta</h2>
+        <form id="signupForm">
+            <input type="text" id="nome" placeholder="Nome completo" required>
+            <input type="email" id="email" placeholder="E-mail" required>
+            <input type="password" id="senha" placeholder="Senha" required>
+            <input type="password" id="confirmarSenha" placeholder="Confirmar senha" required>
+            <button type="submit">Cadastrar</button>
+            <div class="msg" id="mensagem"></div>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('signupForm');
+        const mensagem = document.getElementById('mensagem');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nome = document.getElementById('nome').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const senha = document.getElementById('senha').value;
+            const confirmarSenha = document.getElementById('confirmarSenha').value;
+
+            if (senha !== confirmarSenha) {
+                mensagem.style.color = 'red';
+                mensagem.textContent = 'As senhas não coincidem.';
+            } else {
+                mensagem.style.color = 'green';
+                mensagem.textContent = `Conta criada com sucesso! Bem-vindo(a), ${nome}!`;
+                form.reset();
+            }
+        });
+    </script>
+</body>
+
+</html>
